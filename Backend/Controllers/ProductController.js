@@ -35,6 +35,18 @@ const GetAllProductByCategory = async (req,res) => {
 }
 
 
+// Get items by name
+const GetItemsByName = async (req,res) => {
+  const ItemName = req.params.name;
+  try{
+    const item = await productModels.FindAnItemByName(ItemName);
+    res.status(200).json(item);
+  }catch(error){
+    res.status(400).json({error: error.message});
+  }
+}
+
+
 // Save an item
 const PostAProduct = async  (req,res) => {
 const items = req.body;
@@ -72,4 +84,4 @@ const UpdateAProduct = async  (req,res) => {
     }}
 
 
-module.exports = {GetAllProducts,GetAProduct,PostAProduct,DeleteAProduct,UpdateAProduct,GetAllProductByCategory}
+module.exports = {GetAllProducts,GetAProduct,PostAProduct,DeleteAProduct,UpdateAProduct,GetAllProductByCategory,GetItemsByName}

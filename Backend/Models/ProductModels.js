@@ -83,6 +83,8 @@ ProductSchema.statics.AddItem = async function(items){
         throw Error("All feilds are required");
      }
 
+     items.ItemName = encodeURI(items.ItemName);
+
  const product = await this.create(items);
 
  return product;
@@ -91,6 +93,9 @@ ProductSchema.statics.AddItem = async function(items){
 
 ProductSchema.statics.FindAllItem = async function(){
     const items = await this.find({});
+    for(let i = 0; i < items.length; i++){
+        items[i].ItemName = decodeURI(items[i].ItemName);
+    }
     return items;
 }
 
@@ -99,6 +104,7 @@ ProductSchema.statics.FindAnItemByID = async function(id){
     if(!items){
         throw Error("Invalid Id")
     }
+    items.ItemName = decodeURI(items.ItemName);
     return items;
 }
 
@@ -107,9 +113,28 @@ ProductSchema.statics.FindAnItemByCategory = async function(category){
     if(items.length === 0){
         throw Error("Invalid Category");
     }
-    
+    for(let i = 0; i < items.length; i++){
+        items[i].ItemName = decodeURI(items[i].ItemName);
+    }    
     return items;
 }
+
+
+ProductSchema.statics.FindAnItemByName = async function(name){
+    name = encodeURI(name);
+    const filters = { ItemName:  { $search: name } }
+    const filter = { ItemName: {$regex : `${name}`,$options: 'i'}};
+    const items = await this.find(filter);
+ 
+    if(items.length === 0){ 
+        throw Error("Invalid Name");
+    }
+    for(let i = 0; i < items.length; i++){
+        items[i].ItemName = decodeURI(items[i].ItemName);
+    }
+    return items;
+}
+
 
 ProductSchema.statics.DeleteAnItemById = async function(id){
     const items = await this.findById(id);

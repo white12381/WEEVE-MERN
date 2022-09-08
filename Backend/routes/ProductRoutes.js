@@ -1,14 +1,17 @@
 const routes = require("express").Router();
-const {GetAllProducts,GetAllProductByCategory,GetAProduct,PostAProduct,DeleteAProduct,UpdateAProduct} = require('../Controllers/ProductController')
+const {GetAllProducts,GetItemsByName,GetAllProductByCategory,GetAProduct,PostAProduct,DeleteAProduct,UpdateAProduct} = require('../Controllers/ProductController')
 
-// Get all Products
+// Get all Product
 routes.get('/products',GetAllProducts);
 
-// Get a Products 
+// Get a Product
 routes.get('/product/:id', GetAProduct);
 
-// Get all products by category
-routes.get('/product/category/:category',GetAllProductByCategory)
+// Get all product by category
+routes.get('/product/category/:category',GetAllProductByCategory);
+
+// Get all items by name
+routes.get('/product/name/:name',GetItemsByName);
 
 // Post a products
 routes.post('/product', PostAProduct );
