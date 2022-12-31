@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const fs = require('fs');  
+const multer = require('multer');
 let errors = [];
 
 const ProductSchema = new Schema({
@@ -14,33 +16,22 @@ const ProductSchema = new Schema({
     ProductName: {
         type: String,
         required: true
-    },
-    ItemPictures: {
-        type: Array,
-        required: true,
-         validate : {
-            validator : function(array) {
-              return array.every((v) => typeof v === 'string');
-            }
-          }
-    },
+    }, 
     OverView : {
-        type: String,
-        required: true
-    },
-    OverViewUL: String,
+        type: String
+    }, 
     Description: {
-        type: String,
+        type: String
+    },
+    MediaBase64: {
+        type: [String],
         required: true
     },
-    DescriptionUL: String,
     Warranty: {
-        type: Number,
-        required: false
+        type: Number
     },
     Shipping: {
-        type: Number,
-        required: false
+        type: Number
     },
     Category: {
         type: String,
@@ -62,18 +53,7 @@ ProductSchema.statics.AddItem = async function(items){
         errors.push("ProductName");
         isError = true;
     }
-    if(!items.ItemPictures){
-        errors.push("ItemPictures");
-        isError = true;
-    }
-    if(!items.OverView){
-        errors.push("OverView")
-        isError = true;
-    }
-    if(!items.Description){
-        errors.push(" Description");
-        isError = true;
-    }
+     
     if(!items.Category){
         errors.push(" Category");
         isError = true;
@@ -85,7 +65,18 @@ ProductSchema.statics.AddItem = async function(items){
 
      items.ItemName = encodeURI(items.ItemName);
 
- const product = await this.create(items);
+ const product = await this.create(items); 
+ console.log(product._id);
+
+ try{
+    
+    if(!fs.existsSync(`public/${product._id}`)){
+        fs.mkdirSync(`public/${product._id}`);
+        console.log(`${product._id} created`);
+    }
+ } catch(err){
+    console.error(err);
+ }
 
  return product;
 
@@ -109,7 +100,8 @@ ProductSchema.statics.FindAnItemByID = async function(id){
 }
 
 ProductSchema.statics.FindAnItemByCategory = async function(category){
-    const items = await this.find({"Category": category});
+    category = encodeURI(category);
+    const items = await this.find({Category: {$regex : `${category}`,$options: 'i'}});
     if(items.length === 0){
         throw Error("Invalid Category");
     }

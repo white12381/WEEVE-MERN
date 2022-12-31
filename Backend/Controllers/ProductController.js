@@ -1,5 +1,6 @@
 const {productModels} = require("../Models/ProductModels");
 const {errors} = require("../Models/ProductModels");
+const multer = require('multer');
 
 // get all products
 const GetAllProducts = async (req,res) => {
@@ -46,13 +47,14 @@ const GetItemsByName = async (req,res) => {
   }
 }
 
+ 
 
 // Save an item
 const PostAProduct = async  (req,res) => {
 const items = req.body;
 
 try{
-const item = await productModels.AddItem(items);
+const item = await productModels.AddItem(items); 
 res.status(200).json(item);
 }
 catch(error){
