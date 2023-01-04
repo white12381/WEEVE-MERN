@@ -1,11 +1,12 @@
 const {productModels} = require("../Models/ProductModels");
 const {errors} = require("../Models/ProductModels");
-const multer = require('multer');
+ 
 
 // get all products
 const GetAllProducts = async (req,res) => {
     try{
-const items = await productModels.FindAllItem();
+ const itemPage = req.query.itemPage || 0;
+const items = await productModels.FindAllItem(itemPage);
 res.status(200).json(items);
     }catch(error){
         res.status(400).json({error: error.message})
@@ -27,8 +28,9 @@ const GetAProduct = async (req,res) => {
 // Get items by categories
 const GetAllProductByCategory = async (req,res) => {
     const category = req.params.category;
+    const itemPage = req.query.itemPage || 0;
   try{
-    const item = await productModels.FindAnItemByCategory(category);
+    const item = await productModels.FindAnItemByCategory(category,itemPage);
     res.status(200).json(item);
   }catch(error){
     res.status(400).json({error: "Invalid Category"});
@@ -39,8 +41,9 @@ const GetAllProductByCategory = async (req,res) => {
 // Get items by name
 const GetItemsByName = async (req,res) => {
   const ItemName = req.params.name;
+  const itemPage = req.query.itemPage || 0;
   try{
-    const item = await productModels.FindAnItemByName(ItemName);
+    const item = await productModels.FindAnItemByName(ItemName,itemPage);
     res.status(200).json(item);
   }catch(error){
     res.status(400).json({error: error.message});
@@ -59,6 +62,7 @@ res.status(200).json(item);
 }
 catch(error){
     res.status(400).json({error: error.message,errors});
+    console.log(error);
 }
 }
 

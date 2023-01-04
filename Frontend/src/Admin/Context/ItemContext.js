@@ -13,6 +13,15 @@ export const ItemProvider = ({children}) => {
     const [Warranty, setWarranty] = useState('');
     const [ItemDescription, setItemDescription] = useState(''); 
     const [MediaBase64, setMediaBase64] = useState([]);
+    const [searchText, setSearchText] = useState('');
+    const [searchType, setSearchType] = useState('');
+    const [searchCount, setSearchCount] = useState(0);
+    const [allItems, setAllItems] = useState([]);
+    const [itemPictures, setItemPictures] = useState([]);
+    const [totalItemNumber, setTotalItemNumber] = useState(undefined);
+    const [searchError, setSearchError] = useState('');
+
+    
 
    const ItemInfo = {
     ItemName, ItemPrice, ProductName, ItemMedia,
@@ -20,10 +29,13 @@ export const ItemProvider = ({children}) => {
     Shipping, Category,ItemDescription, MediaBase64  
    }
 
+   const Search = { searchText, searchType, searchCount, allItems, searchError ,itemPictures, totalItemNumber};
+   const SetSearch = { setSearchError,setSearchText, setTotalItemNumber, setSearchType, setSearchCount, setAllItems, setItemPictures};
+
    const ItemMethods = {
     setItemName,setItemDescription,setMediaBase64,setItemPrice, setProductName, setItemMedia, setOverView, setShipping, setListCategory, setWarranty
    }
-   return <ItemContext.Provider value={{ItemInfo, ItemMethods}}>
+   return <ItemContext.Provider value={{ItemInfo, ItemMethods, Search,SetSearch}}>
    {children}
    </ItemContext.Provider>
 }
