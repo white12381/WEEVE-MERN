@@ -5,13 +5,15 @@ const ItemContext = createContext();
 export const ItemProvider = ({children}) => {
     const [ItemName,setItemName] = useState('');
     const [ItemPrice,setItemPrice] = useState('');
+    const [ItemBonusPrice, setItemBonusPrice] = useState('');
     const [ProductName,setProductName] = useState('');
-    const [ItemMedia, setItemMedia] = useState([]);
+    const [ItemMediaSize, setItemMediaSize] = useState([]);
     const [OverView,setOverView] = useState('');  
     const [Shipping,setShipping] = useState('');
-    const [Category,setListCategory] = useState(''); 
+    const [Category,setCategory] = useState(''); 
     const [Warranty, setWarranty] = useState('');
-    const [ItemDescription, setItemDescription] = useState(''); 
+    const [readOnly, setReadOnly] = useState(false);
+    const [ Description, setDescription] = useState(''); 
     const [MediaBase64, setMediaBase64] = useState([]);
     const [searchText, setSearchText] = useState('');
     const [searchType, setSearchType] = useState('');
@@ -20,20 +22,21 @@ export const ItemProvider = ({children}) => {
     const [itemPictures, setItemPictures] = useState([]);
     const [totalItemNumber, setTotalItemNumber] = useState(undefined);
     const [searchError, setSearchError] = useState('');
+    const [itemId, setItemId] = useState('');
 
     
 
    const ItemInfo = {
-    ItemName, ItemPrice, ProductName, ItemMedia,
+    ItemName, ItemPrice, ProductName, ItemMediaSize,
     OverView,Warranty,
-    Shipping, Category,ItemDescription, MediaBase64  
+    Shipping, Category,Description, MediaBase64,ItemBonusPrice  
    }
 
-   const Search = { searchText, searchType, searchCount, allItems, searchError ,itemPictures, totalItemNumber};
-   const SetSearch = { setSearchError,setSearchText, setTotalItemNumber, setSearchType, setSearchCount, setAllItems, setItemPictures};
+   const Search = { searchText,itemId ,searchType, readOnly, searchCount, allItems, searchError ,itemPictures, totalItemNumber};
+   const SetSearch = { setSearchError, setItemId ,setSearchText, setReadOnly ,setTotalItemNumber, setSearchType, setSearchCount, setAllItems, setItemPictures};
 
    const ItemMethods = {
-    setItemName,setItemDescription,setMediaBase64,setItemPrice, setProductName, setItemMedia, setOverView, setShipping, setListCategory, setWarranty
+    setItemName, setItemBonusPrice,setDescription,setMediaBase64,setItemPrice, setProductName, setItemMediaSize, setOverView, setShipping, setCategory, setWarranty
    }
    return <ItemContext.Provider value={{ItemInfo, ItemMethods, Search,SetSearch}}>
    {children}

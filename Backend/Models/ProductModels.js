@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const fs = require('fs');  
-const multer = require('multer');
 let errors = [];
-
+ 
 const ProductSchema = new Schema({
     ItemName:{
         type: String,
@@ -12,6 +10,9 @@ const ProductSchema = new Schema({
     ItemPrice: {
         type: Number,
         required: true
+    },
+    ItemBonusPrice: {
+        type: Number
     },
     ProductName: {
         type: String,
@@ -32,6 +33,9 @@ const ProductSchema = new Schema({
     Category: {
         type: String,
         required: true
+    },
+    ItemMediaSize: {
+        type: Array
     },
     MediaBase64: {
         type: [String],
@@ -174,7 +178,7 @@ ProductSchema.statics.UpdateAnItemById = async function(id,datas){
     if(!items){
         throw Error("Invalid Id")
     }
-    const itemUpdate = await this.update(datas);
+    const itemUpdate = await this.findOneAndUpdate(items,datas);
     return itemUpdate;
 }
 

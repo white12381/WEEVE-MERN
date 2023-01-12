@@ -4,8 +4,10 @@ import 'react-quill/dist/quill.snow.css';
 import ItemContext from '../Context/ItemContext';
 
 function OverVeiws() { 
-  const ItemDescription = useContext(ItemContext).ItemInfo.ItemDescrip;
-  const setItemDescription = useContext(ItemContext).ItemMethods.setItemDescription;
+  const item = useContext(ItemContext);
+  const OverView = useContext(ItemContext).ItemInfo.OverView;
+  const setOverView = useContext(ItemContext).ItemMethods.setOverView;
+  const readOnly = item.Search.readOnly;
 
  var modules = {
     toolbar: [
@@ -25,7 +27,7 @@ function OverVeiws() {
   ]
 
   return <>
-    <ReactQuill theme="snow" placeholder='Optional' value={ItemDescription} onChange={setItemDescription} formats={formats} modules={modules} />
+    <ReactQuill theme="snow" readOnly={readOnly} placeholder='Optional' value={OverView} onChange={setOverView} formats={formats} modules={modules} />
   </>
 }
 

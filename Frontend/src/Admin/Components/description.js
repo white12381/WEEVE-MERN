@@ -4,9 +4,10 @@ import 'react-quill/dist/quill.snow.css';
 import ItemContext from '../Context/ItemContext';
 
 function Descriptions() {
-
-  const OverView = useContext(ItemContext).ItemInfo.OverView;
-  const setOverView = useContext(ItemContext).ItemMethods.setOverView;
+  const item = useContext(ItemContext);
+  const Description = useContext(ItemContext).ItemInfo.Description;
+  const setDescription = useContext(ItemContext).ItemMethods.setDescription;
+  const readOnly = item.Search.readOnly;
 
  var modules = {
     toolbar: [
@@ -26,7 +27,7 @@ function Descriptions() {
   ]
 
   return <>
-    <ReactQuill theme="snow"  placeholder='Optional' value={OverView} onChange={setOverView} formats={formats} modules={modules} />
+    <ReactQuill theme="snow" readOnly={readOnly}  placeholder='Optional' value={Description} onChange={setDescription} formats={formats} modules={modules} />
   </>
 }
 

@@ -8,7 +8,7 @@ import  { useContext, useState } from "react";
  const add = async () => {
  
     console.log(item);
-   if( (item.ItemName !== '') && (item.ItemPrice > 0 ) && (item.Category !== '' ) && item.ItemMedia.length > 0){
+   if( (item.ItemName !== '') && (item.ItemPrice > 0 ) && (item.Category !== '' ) && item.ItemMediaSize.length > 0){
     setSubmit(true);
    const response = await fetch('http://127.0.0.1:4000/admin/product',{
         method: 'Post',
@@ -23,13 +23,14 @@ import  { useContext, useState } from "react";
     else{
         itemMethods.setItemName('');
         itemMethods.setProductName(''); 
-        itemMethods.setItemMedia([]);
+        itemMethods.setItemMediaSize([]);
         itemMethods.setMediaBase64([]);
         itemMethods.setItemPrice('');
         itemMethods.setOverView('');
         itemMethods.setWarranty('');
         itemMethods.setShipping(''); 
-        itemMethods.setItemDescription('');
+        itemMethods.setDescription('');
+        itemMethods.setItemBonusPrice('');
         console.log("Success");
         setSubmit(false);
     }

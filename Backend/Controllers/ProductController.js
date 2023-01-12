@@ -58,7 +58,7 @@ const items = req.body;
 
 try{
 const item = await productModels.AddItem(items); 
-res.status(200).json(item);
+res.status(200).json(item); 
 }
 catch(error){
     res.status(400).json({error: error.message,errors});
