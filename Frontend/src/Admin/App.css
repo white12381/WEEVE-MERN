@@ -1,0 +1,32 @@
+ #LogOut{
+    margin-top: -15px;
+    float: right;
+    background-color: black;
+    color: white;
+ }
+ #Search{
+    margin-left: 80px;
+ }
+ #logo{
+    width: 10%
+ }
+ #navbar{
+    background-color: black;
+ }
+ #AddItem{
+   margin-left: -300px;
+ }
+ 
+ #components-form-demo-form-context .user {
+   margin-bottom: 8px;
+ }
+ 
+ #components-form-demo-form-context .user .ant-avatar {
+   margin-right: 8px;
+ }
+ 
+ .ant-row-rtl #components-form-demo-form-context .user .ant-avatar {
+   margin-right: 0;
+   margin-left: 8px;
+ }
+  

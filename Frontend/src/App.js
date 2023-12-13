@@ -1,11 +1,9 @@
-import './App.css';
+import AppAdmin from "./Admin/App";
 
-function App() {
-  return (
-    <div className="App">
-      App
-    </div>
-  );
+const App = () => {
+    return<>
+    <AppAdmin/>
+    </>
 }
 
 export default App;

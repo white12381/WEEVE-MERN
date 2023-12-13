@@ -1,6 +1,9 @@
-const routes = require("express").Router();
+const routes = require("express").Router(); 
+const path = require('path');
 const {GetAllProducts,GetItemsByName,GetAllProductByCategory,GetAProduct,PostAProduct,DeleteAProduct,UpdateAProduct} = require('../Controllers/ProductController')
 
+ 
+ 
 // Get all Product
 routes.get('/products',GetAllProducts);
 
@@ -14,7 +17,7 @@ routes.get('/product/category/:category',GetAllProductByCategory);
 routes.get('/product/name/:name',GetItemsByName);
 
 // Post a products
-routes.post('/product', PostAProduct );
+routes.post('/product',PostAProduct );
 
 // Delete a Products 
 routes.delete('/product/:id', DeleteAProduct);

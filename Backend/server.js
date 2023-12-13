@@ -1,5 +1,6 @@
 const { json } = require("express");
 const express = require("express");
+const cors = require("cors")
 const app = express();
 require("dotenv").config();
 const productsRoutes = require("./routes/ProductRoutes");
@@ -13,8 +14,15 @@ app.listen(process.env.PORT,( () => console.log(`connected to database and runni
 })
 
 // MiddleWares
-app.use(express.json());
-app.use('/api/',productsRoutes);
+app.use(express.urlencoded({ limit: '500mb', extended: false}));
+app.use(express.static('public'));
+app.use(cors());
+app.use(express.json({limit: '500mb'}));
+app.use((req,res,next) => {
+    console.log(`Request path is ${req.url}, Request method is ${req.method}`);
+    next();
+});
+app.use('/admin/',productsRoutes);
 
 
 
