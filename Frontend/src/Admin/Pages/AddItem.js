@@ -23,7 +23,7 @@ const AddItem = () => {
   const setItemSearch = useContext(ItemContext).SetSearch;
   const [update, setUpdate] = useState(false);
 
-  const {add,submit} = AddItems();
+  const {add,submit,error} = AddItems();
   const SubmitItem = async (e) => {
     e.preventDefault(); 
     await add(); 
@@ -195,7 +195,7 @@ const HandleListDropdown = (e) => {
                    <div className="col-5 me-3">
                     {
                       ( String(MediaBase64[i]).split('/')[0]  === 'data:image') ? 
-                      <img src={MediaBase64[i]} width='100%' /> :
+                      <img src={MediaBase64[i]} width='100%' alt={ItemName} /> :
                       <video src={MediaBase64[i]} width='100%' controls >
                         Your brower does not support this video type
                       </video>
@@ -214,6 +214,7 @@ const HandleListDropdown = (e) => {
             </div>
 
             </div>
+            <p className="mt-4 mb-0 text-danger">{error}</p>
               {
                 readOnly?            
                 <button type="button" className="col-1 mt-3 btn btn-dark" onClick={edit} >Edit</button> :
@@ -224,7 +225,9 @@ const HandleListDropdown = (e) => {
                     <button type="button" className="col-1 mt-3 btn btn-dark" onClick={() => updateItem(item.Search.itemId)}  > Update </button> 
                     </div>
                     :
-            <button className="col-1 mt-3 btn btn-dark" disabled={submit} >Upload</button>
+            <button className="col-1 mt-3 btn btn-dark" disabled={submit} >
+             {submit ? "Uploading" :  "Upload" }
+              </button>
                   }
             </div>
             

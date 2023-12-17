@@ -1,6 +1,5 @@
 const {productModels} = require("../Models/ProductModels");
-const {errors} = require("../Models/ProductModels");
- 
+const {errors} = require("../Models/ProductModels"); 
 
 // get all products
 const GetAllProducts = async (req,res) => {
@@ -89,5 +88,18 @@ const UpdateAProduct = async  (req,res) => {
       res.status(400).json({error: "Invalid Category"});
     }}
 
+    
+// Get Image
+const GetProductImage = async  (req,res) => {
+  const id = req.params.id; 
+  try{
+    const image = await productModels.GetProductImage(id); 
+    const imageType = image.split(',')[0].split(':')[1].split(';')[0] 
+    // const binaryData = Buffer.from(item, 'base64');
+    res.setHeader('Content-Type', imageType);
+    res.status(200).send(Buffer.from(image.split(',')[1],'base64')); 
+  }catch(error){
+    res.status(400).json({error: error.message});
+  }}
 
-module.exports = {GetAllProducts,GetAProduct,PostAProduct,DeleteAProduct,UpdateAProduct,GetAllProductByCategory,GetItemsByName}
+module.exports = {GetAllProducts,GetProductImage,GetAProduct,PostAProduct,DeleteAProduct,UpdateAProduct,GetAllProductByCategory,GetItemsByName}

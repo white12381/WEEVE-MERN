@@ -102,7 +102,8 @@ const HomePage = () => {
         }
          }
 
- useEffect( () => {fetchItems();},[]);
+ useEffect( () => {
+    fetchItems();},[]);
  
 
  const previous = async () => {
@@ -174,7 +175,7 @@ else{
 <h4>{item.Category}</h4>
     </div>
     <div className='col-4 col-md-2' >
-<img src={picture[index]} height='auto' width='100%'/>
+<img src={picture[index]} height='auto' alt={item.ProductName} width='100%'/>
     </div>
     <div className='col-1'>
 <button onClick={() => deleteItem(item._id,index)} className='btn btn-danger'>Delete</button>

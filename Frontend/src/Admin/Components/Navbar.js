@@ -80,6 +80,9 @@ const Navbar = () => {
   const setName = () => {
     setItemSearch.setSearchType('Name');
   }
+  const setAll = () => {
+    setItemSearch.setSearchType('All');
+  }
 
    
     return <>
@@ -108,6 +111,7 @@ const Navbar = () => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
+        <Dropdown.Item onClick={setAll}>Search All</Dropdown.Item>
         <Dropdown.Item onClick={setCategory}>Search Category</Dropdown.Item>
         <Dropdown.Item onClick={setName}>Search Name</Dropdown.Item> 
       </Dropdown.Menu>
@@ -121,7 +125,8 @@ const Navbar = () => {
     </div>
   </header>
   </div>
-    </>
+  <h1>23</h1> 
+  </>
 }
 
 export default Navbar;

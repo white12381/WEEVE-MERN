@@ -3,11 +3,10 @@ import  { useContext, useState } from "react";
 
  export const AddItems = () => {
  const [submit, setSubmit] = useState(false);
+ const [error, setError] = useState('');
  const item = useContext(ItemContext).ItemInfo;
  const itemMethods = useContext(ItemContext).ItemMethods;
- const add = async () => {
- 
-    console.log(item);
+ const add = async () => { 
    if( (item.ItemName !== '') && (item.ItemPrice > 0 ) && (item.Category !== '' ) && item.ItemMediaSize.length > 0){
     setSubmit(true);
    const response = await fetch('http://127.0.0.1:4000/admin/product',{
@@ -18,6 +17,7 @@ import  { useContext, useState } from "react";
     const data = await response.json();
     if(!response.ok){
         console.log(data.error);
+        setError(data.error)
         setSubmit(false);
     }
     else{
@@ -36,6 +36,6 @@ import  { useContext, useState } from "react";
     }
 }
 }
-return {add,submit};
+return {add,submit,error};
 }
 

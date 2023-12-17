@@ -182,5 +182,13 @@ ProductSchema.statics.UpdateAnItemById = async function(id,datas){
     return itemUpdate;
 }
 
+ProductSchema.statics.GetProductImage = async function(id){
+    const items = await this.findById(id);
+    if(!items){
+        throw Error("Invalid Id")
+    }
+    return items.MediaBase64[0];
+}
+
 var productModels = mongoose.model("ProductsItems",ProductSchema);
 module.exports = {productModels,errors}

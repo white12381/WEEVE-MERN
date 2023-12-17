@@ -1,6 +1,6 @@
 const routes = require("express").Router(); 
 const path = require('path');
-const {GetAllProducts,GetItemsByName,GetAllProductByCategory,GetAProduct,PostAProduct,DeleteAProduct,UpdateAProduct} = require('../Controllers/ProductController')
+const {GetAllProducts,GetProductImage,GetItemsByName,GetAllProductByCategory,GetAProduct,PostAProduct,DeleteAProduct,UpdateAProduct} = require('../Controllers/ProductController')
 
  
  
@@ -25,8 +25,8 @@ routes.delete('/product/:id', DeleteAProduct);
 // update a Products 
 routes.patch('/product/:id', UpdateAProduct);
 
-
-
+// get Product Image
+routes.get('/image/:id',GetProductImage);
 
 
 module.exports = routes;
