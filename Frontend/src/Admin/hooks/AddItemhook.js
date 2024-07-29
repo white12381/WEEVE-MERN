@@ -16,7 +16,7 @@ import  { useContext, useState } from "react";
     });
     const data = await response.json();
     if(!response.ok){
-        console.log(data.error);
+        alert(data.error);
         setError(data.error)
         setSubmit(false);
     }
@@ -31,7 +31,7 @@ import  { useContext, useState } from "react";
         itemMethods.setShipping(''); 
         itemMethods.setDescription('');
         itemMethods.setItemBonusPrice('');
-        console.log("Success");
+        alert("Success");
         setSubmit(false);
     }
 }

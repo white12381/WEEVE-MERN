@@ -1,32 +1,53 @@
- #LogOut{
-    margin-top: -15px;
-    float: right;
-    background-color: black;
-    color: white;
+ #LogOut {
+   margin-top: -15px;
+   float: right;
+   background-color: black;
+   color: white;
  }
- #Search{
-    margin-left: 80px;
+
+ #Search {
+   margin-left: 80px;
  }
- #logo{
-    width: 10%
+
+ #logo {
+   width: 10%
  }
- #navbar{
-    background-color: black;
+
+ #navbar {
+   background-color: black;
  }
- #AddItem{
+
+ #AddItem {
    margin-left: -300px;
  }
- 
+
  #components-form-demo-form-context .user {
    margin-bottom: 8px;
  }
- 
+
  #components-form-demo-form-context .user .ant-avatar {
    margin-right: 8px;
  }
- 
+
  .ant-row-rtl #components-form-demo-form-context .user .ant-avatar {
    margin-right: 0;
    margin-left: 8px;
  }
-  
+ @keyframes example {
+  0%    {rotate: 0;}
+  100%  {rotate: 360deg;}
+}
+
+ .loader {
+  animation-name: example; animation-delay: 0s;
+  animation-duration: 4s; animation-iteration-count: infinite;
+   width: 40px;
+   border: solid 1px;
+   border-color: yellow;
+   border-left: 0px;
+   border-right: 0px;
+   border-radius: 100%;
+   margin: 10px auto;
+   height: 40px;
+   
+ }

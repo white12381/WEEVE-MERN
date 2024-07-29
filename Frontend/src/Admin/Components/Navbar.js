@@ -124,8 +124,10 @@ const Navbar = () => {
       </div>
     </div>
   </header>
+  <div className='loader'>
   </div>
-  <h1>23</h1> 
+  </div>
+  
   </>
 }
 
